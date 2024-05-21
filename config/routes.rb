@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'users#index'
+
   get("/users", { :controller => "users", :action => "index" })
   get("/users/:path_username", { :controller => "users", :action => "show" })
   get("/photos", { :controller => "photos", :action => "index" })
@@ -9,5 +11,6 @@ Rails.application.routes.draw do
   post("/update_photo/:modify_id", { :controller => "photos", :action => "update" })
   post("/add_comment", { :controller => "comments", :action => "create" })
 
-  post("/add_user", { :controller => "users", :action => "create" })  # New route for adding users
+  post("/add_user", { :controller => "users", :action => "create" })
+  post("/update_user/:modify_id", { :controller => "users", :action => "update" })  # New route for updating users
 end

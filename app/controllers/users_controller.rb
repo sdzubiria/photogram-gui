@@ -18,9 +18,25 @@ class UsersController < ApplicationController
     a_new_user.username = input_username
     
     if a_new_user.save
-      redirect_to("/users")
+      redirect_to("/users/#{a_new_user.username}")
     else
       redirect_to("/users", alert: a_new_user.errors.full_messages.to_sentence)
     end
   end
+
+  def update
+    the_id = params.fetch("modify_id")
+    matching_users = User.where({ :id => the_id })
+    the_user = matching_users.at(0)
+
+    input_username = params.fetch("input_username")
+    the_user.username = input_username
+
+    if the_user.save
+      redirect_to("/users/#{the_user.username}")
+    else
+      redirect_to("/users/#{the_user.username}", alert: the_user.errors.full_messages.to_sentence)
+    end
+  end
 end
+
